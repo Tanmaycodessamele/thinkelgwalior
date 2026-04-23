@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thinkelgwalior.netlify.app/sitemap.xml

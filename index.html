@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Thinkel – Web Designer & Developer | Gwalior</title>
+<meta name="description" content="Freelance web designer based in Indore. I build fast, clean websites for local businesses. HTML, CSS, JS.">
+
+<!-- Open Graph (for WhatsApp/social link previews) -->
+<meta property="og:title" content="Thinkel – Web Designer | Gwalior">
+<meta property="og:description" content="Clean, fast websites for local businesses in Indore.">
+<meta property="og:image" content="https://thinkelgwalior.netlify.app/assets/images/preview.jpg">
+<meta property="og:url" content="https://thinkelgwalior.netlify.app">
+<meta property="og:type" content="website">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://thinkelgwalior.netlify.app/">
+<link rel="icon" href = 'assets/images/logo.png'>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+html{scroll-behavior:smooth;}
+    body {
+      font-family: 'Inter', system_ui, sans-serif;
+    }
+	.glass-bg{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    backdrop-filter: blur(6px);
+    z-index: 1;
+}    
+    .heading-font {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+
+    .hero-bg {
+      background-image: linear-gradient(rgba(10,10,10,0.75), rgba(10,10,10,0.9)), 
+                        url('https://picsum.photos/id/1015/1920/1080');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      position: relative;
+    }
+
+    .card-hover {
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 25px 50px -12px rgb(103 232 249 / 0.25);
+    }
+
+    .nav-link {
+      position: relative;
+    }
+    
+    .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #67e8f9;
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover:after {
+      width: 100%;
+    }
+
+    .section-title {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    
+    .section-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+  </style>
+</head>
+<body class="bg-[#0A0A0A] text-white overflow-x-hidden">
+
+<!-- LOADER — paste right after <body> -->
+<style>
+  #thinkel-loader {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #0A0A0A;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  #loader-left, #loader-right {
+    position: absolute; top: 0; width: 50%; height: 100%;
+    background: #0A0A0A; z-index: 2;
+    transition: transform 0.7s cubic-bezier(0.77,0,0.18,1);
+  }
+  #loader-left { left: 0; }
+  #loader-right { right: 0; }
+  #loader-left.open { transform: translateX(-100%); }
+  #loader-right.open { transform: translateX(100%); }
+
+  #loader-center {
+    position: relative; z-index: 3;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.7s cubic-bezier(0.77,0,0.18,1), opacity 0.5s ease;
+    /* Scales the entire loader based on viewport height */
+    width: 40vh; 
+    height: 40vh;
+  }
+  
+  #loader-center.explode { transform: scale(3); opacity: 0; }
+
+  .ring-container {
+    width: 100%; height: 100%; 
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* Ensures the SVG fills the container */
+  #arc-svg { 
+    width: 100%; height: 100%;
+    position: absolute; 
+    animation: spin 1.4s linear infinite; 
+  }
+  #arc-svg.stop { animation: none; }
+
+  /* Responsive Logo Container */
+  .logo-text {
+    position: absolute;
+    width: 50%; /* Adjust this to make logo bigger/smaller inside circle */
+    height: 50%;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 4;
+  }
+  .logo-text img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .scan-line {
+    position: absolute; width: 80%; height: 2px;
+    background: linear-gradient(90deg, transparent, #00e5ff88, transparent);
+    animation: scan 1.2s ease-in-out infinite alternate;
+    z-index: 5;
+  }
+  @keyframes scan { from { top: 25%; opacity: 0.2; } to { top: 75%; opacity: 0.8; } }
+
+  .hex-dot {
+    position: absolute; width: 1%; height: 1%;
+    background: #00e5ff; border-radius: 50%;
+    opacity: 0; animation: blink 0.4s ease infinite alternate;
+  }
+</style>
+
+<div id="thinkel-loader">
+  <div id="loader-left"></div>
+  <div id="loader-right"></div>
+  <div id="loader-center">
+    <div class="ring-container">
+      <div class="scan-line"></div>
+      <svg id="arc-svg" viewBox="0 0 140 140">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <circle cx="70" cy="70" r="62" fill="none" stroke="#00e5ff18" stroke-width="1"/>
+        <circle cx="70" cy="70" r="54" fill="none" stroke="#00e5ff10" stroke-width="0.5"/>
+        <path d="M70 8 A62 62 0 0 1 132 70" fill="none" stroke="#00e5ff" stroke-width="2" stroke-linecap="round" filter="url(#glow)"/>
+        <circle cx="70" cy="8" r="3" fill="#00e5ff" filter="url(#glow)"/>
+        <circle cx="132" cy="70" r="3" fill="#00e5ff" filter="url(#glow)"/>
+        <path d="M70 132 A62 62 0 0 1 22 22" fill="none" stroke="#00e5ff55" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="22" cy="22" r="2" fill="#00e5ff55"/>
+        <line x1="70" y1="4" x2="70" y2="14" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="126" y1="34" x2="118" y2="38" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="126" y1="106" x2="118" y2="102" stroke="#00e5ff44" stroke-width="1" stroke-linecap="round"/>
+        <line x1="14" y1="106" x2="22" y2="102" stroke="#00e5ff44" stroke-width="1" stroke-linecap="round"/>
+        <circle cx="70" cy="70" r="46" fill="none" stroke="#00e5ff0a" stroke-width="12"/>
+      </svg>
+      <div class="logo-text">
+        <img src="assets/images/logo.png" alt="logo">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    var start = Date.now();
+    var MIN = 3000;
+    function runLoader() {
+      var elapsed = Date.now() - start;
+      var wait = Math.max(0, MIN - elapsed);
+      setTimeout(function() {
+        document.getElementById('arc-svg').classList.add('stop');
+        setTimeout(function() {
+          document.getElementById('loader-left').classList.add('open');
+          document.getElementById('loader-right').classList.add('open');
+          document.getElementById('loader-center').classList.add('explode');
+          setTimeout(function() {
+            var loader = document.getElementById('thinkel-loader');
+            if (loader) loader.remove();
+          }, 800);
+        }, 300);
+      }, wait);
+    }
+    if (document.readyState === 'complete') { runLoader(); }
+    else { window.addEventListener('load', runLoader); }
+  })();
+</script>
+<!-- END LOADER -->
+
+
+
+  <!-- Full-screen Translucent Glass Background -->
+  <div class="glass-bg"></div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-[#0A0A0A]/80 backdrop-blur-md border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="text-2xl font-semibold tracking-tighter heading-font text-white">THINKEL</div>
+      
+      <div class="hidden md:flex items-center gap-10 text-sm font-medium">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      
+      <a href="#contact" 
+         class="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full text-sm font-medium transition-all">
+        Start a Project
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg min-h-screen flex items-center relative">
+    <div class="max-w-5xl mx-auto px-6 text-center pt-20 z-10 relative">
+      <h1 class="heading-font text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-semibold leading-tight tracking-tighter mb-6">
+       Get your website<br>| at the best quality |<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-teal-300">At lowest prices</span>
+      </h1>
+      
+      <p class="max-w-lg mx-auto text-base md:text-xl text-gray-300 mb-10">
+        Premium website design &amp; development agency turning ideas into authoritative digital presences.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" 
+           class="px-8 py-4 bg-cyan-400 hover:bg-cyan-300 text-black font-semibold rounded-2xl transition-all inline-flex items-center justify-center gap-2">
+          <i class="fa-solid fa-arrow-right"></i> Start Your Project
+        </a>
+        <a href="#work" 
+           class="px-8 py-4 border border-white/30 hover:border-white/50 rounded-2xl transition-all">
+          View Our Work
+        </a>
+      </div>
+    </div>
+
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
+      <i class="fa-solid fa-chevron-down text-2xl text-gray-400"></i>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-24 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="section-title text-3xl md:text-5xl heading-font font-semibold mb-4">What We Master</h2>
+        <p class="text-gray-400 max-w-md mx-auto">Simple, fast, and extraordinarily refined digital solutions.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="glass rounded-3xl p-8 card-hover bg-white/5">
+          <div class="h-12 w-12 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-6">
+            <i class="fa-solid fa-code text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3">Website Development</h3>
+          <p class="text-gray-400">High-performance, scalable websites built with modern frameworks and lightning-fast loading.</p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 card-hover bg-white/5">
+          <div class="h-12 w-12 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-6">
+            <i class="fa-solid fa-palette text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3">Website Designing</h3>
+          <p class="text-gray-400">Pixel-perfect, conversion-focused designs that look premium on every device.</p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 card-hover bg-white/5">
+          <div class="h-12 w-12 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-6">
+            <i class="fa-solid fa-image text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3">Graphic Designing</h3>
+          <p class="text-gray-400">Branding, illustrations, and visuals that elevate your entire digital identity.</p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 card-hover bg-white/5">
+          <div class="h-12 w-12 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-6">
+            <i class="fa-solid fa-video text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3">Video Editing</h3>
+          <p class="text-gray-400">Cinematic storytelling and motion graphics that captivate your audience.</p>
+        </div>
+
+        <div class="glass rounded-3xl p-8 card-hover bg-white/5">
+          <div class="h-12 w-12 bg-cyan-500/10 text-cyan-400 rounded-2xl flex items-center justify-center mb-6">
+            <i class="fa-solid fa-rocket text-2xl"></i>
+          </div>
+          <h3 class="text-2xl font-semibold mb-3">Landing Pages</h3>
+          <p class="text-gray-400">High-converting landing pages designed to turn visitors into loyal customers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selected Work -->
+  <section id="work" class="py-24 bg-black/50 relative z-10">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-12 text-center">
+        <h2 class="section-title text-3xl md:text-5xl heading-font font-semibold">Selected Work</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <a href='https://www.bestnamkeen.in' target='_blank'>
+          <div class="group relative overflow-hidden rounded-3xl">
+            <img src="assets/images/best.png" 
+                 alt="Best Namkeen Gwalior" 
+                 class="w-full h-full object-cover aspect-video transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-8">
+              <div>
+                <h3 class="text-2xl font-semibold">Best namkeen gwalior</h3>
+                <p class="text-gray-300">Full website</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a href='https://www.sameleclasses.in' target='_blank'>
+          <div class="group relative overflow-hidden rounded-3xl">
+            <img src="assets/images/sameleclasses.png" 
+                 alt="Samele Classes" 
+                 class="w-full h-full object-cover aspect-video transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-8">
+              <div>
+                <h3 class="text-2xl font-semibold">Samele classes</h3>
+                <p class="text-gray-300">Complete website</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-24 relative z-10">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="section-title text-3xl md:text-5xl heading-font font-semibold mb-8">Quiet Confidence.<br>Outstanding Results.</h2>
+      <p class="text-base md:text-xl text-gray-300 leading-relaxed">
+        At Thinkel, we believe great design doesn't need to shout. 
+        We create digital experiences that feel premium, load instantly, 
+        and leave a lasting impression — because authority is built in the details.
+      </p>
+      
+      <div class="mt-16 grid grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-4xl font-semibold text-cyan-400">50+</div>
+          <div class="text-gray-400 mt-2">Projects Delivered</div>
+        </div>
+        <div>
+          <div class="text-4xl font-semibold text-cyan-400">98%</div>
+          <div class="text-gray-400 mt-2">Client Retention</div>
+        </div>
+        <div>
+          <div class="text-4xl font-semibold text-cyan-400">4.9s</div>
+          <div class="text-gray-400 mt-2">Avg. Load Time</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Contact -->
+<section id="contact" class="py-24 bg-black/70 relative z-10">
+  <div class="max-w-2xl mx-auto px-6">
+    <div class="glass rounded-3xl p-12 md:p-16 bg-white/5 text-center">
+      
+      <h2 class="text-2xl md:text-4xl heading-font font-semibold mb-10">Let's Build Something Exceptional</h2>
+      
+      <p class="text-gray-400 text-lg mb-12 max-w-md mx-auto">
+        Ready to elevate your digital presence? Reach out directly.
+      </p>
+
+      <div class="space-y-10">
+        <!-- Phone -->
+        <div>
+          <p class="text-sm text-gray-400 mb-2">Call/WhatsApp Us</p>
+          <a href="tel:9516703769" 
+             class="inline-flex items-center gap-4 text-xl md:text-3xl font-medium hover:text-cyan-400 transition-all group">
+            <i class="fa-solid fa-phone text-cyan-400 text-2xl"></i>
+            <span>+91 95167 03769</span>
+          </a>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <p class="text-sm text-gray-400 mb-2">Email Us</p>
+          <a href="mailto:thinkelsamele@gmail.com" 
+             class="inline-flex items-center gap-4 text-base md:text-2xl font-medium hover:text-cyan-400 transition-all break-all group">
+            <i class="fa-solid fa-envelope text-cyan-400 text-2xl"></i>
+            <span>thinkelsamele@gmail.com</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/10">
+        <p class="text-sm text-gray-500">
+          We usually respond within a few hours during business days.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer class="py-16 border-t border-white/10 relative z-10">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-400">
+      <p>© 2026 Thinkel Services. Crafted with intention in India.</p>
+      <p class="mt-2">Premium Website Design & Development Agency</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section-title').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
