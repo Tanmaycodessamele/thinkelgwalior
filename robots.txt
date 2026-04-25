@@ -1,4 +1,29 @@
+# Thinkel Web Designers Gwalior — robots.txt
+
+# Allow all standard search engines
 User-agent: *
+Allow: /
+
+# Explicitly allow AI crawlers (for ChatGPT, Claude, Gemini indexing)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://thinkelgwalior.netlify.app/sitemap.xml
